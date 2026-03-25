@@ -1,15 +1,18 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: Self-Healing Ecosystem Model API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: ecosystems
+    description: Ecosystem operations
+  - name: simulation
+    description: Simulation operations
 paths:
   /healthz:
     get:
@@ -24,6 +27,164 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /ecosystems:
+    post:
+      operationId: createEcosystem
+      tags: [ecosystems]
+      summary: Create a new ecosystem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateEcosystemInput"
+      responses:
+        "201":
+          description: Ecosystem created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ecosystem"
+    get:
+      operationId: listEcosystems
+      tags: [ecosystems]
+      summary: List all ecosystems
+      responses:
+        "200":
+          description: List of ecosystems
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Ecosystem"
+
+  /ecosystems/{id}:
+    get:
+      operationId: getEcosystem
+      tags: [ecosystems]
+      summary: Get ecosystem by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Ecosystem details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ecosystem"
+        "404":
+          description: Ecosystem not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    delete:
+      operationId: deleteEcosystem
+      tags: [ecosystems]
+      summary: Delete an ecosystem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /ecosystems/{id}/intervene:
+    put:
+      operationId: applyIntervention
+      tags: [ecosystems]
+      summary: Apply an intervention to an ecosystem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InterventionInput"
+      responses:
+        "200":
+          description: Intervention applied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ecosystem"
+        "404":
+          description: Ecosystem not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /simulation/{id}/run:
+    post:
+      operationId: runSimulation
+      tags: [simulation]
+      summary: Run population simulation for an ecosystem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SimulationRunInput"
+      responses:
+        "200":
+          description: Simulation results
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimulationResult"
+        "404":
+          description: Ecosystem not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /simulation/{id}/history:
+    get:
+      operationId: getSimulationHistory
+      tags: [simulation]
+      summary: Get simulation history for an ecosystem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Simulation history
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SimulationResult"
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +195,240 @@ components:
       required:
         - status
 
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
+
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+        - success
+
+    EcosystemType:
+      type: string
+      enum: [forest, river, grassland]
+
+    HealthStatusEnum:
+      type: string
+      enum: [Healthy, Stressed, Collapsing]
+
+    Species:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+          enum: [plant, herbivore, predator]
+        initialPopulation:
+          type: number
+      required:
+        - id
+        - name
+        - type
+        - initialPopulation
+
+    CreateEcosystemInput:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          $ref: "#/components/schemas/EcosystemType"
+        temperature:
+          type: number
+          minimum: -10
+          maximum: 50
+        rainfall:
+          type: number
+          minimum: 0
+          maximum: 5000
+        pollution:
+          type: number
+          minimum: 0
+          maximum: 1
+        deforestationRate:
+          type: number
+          minimum: 0
+          maximum: 1
+        species:
+          type: array
+          items:
+            $ref: "#/components/schemas/Species"
+      required:
+        - name
+        - type
+        - temperature
+        - rainfall
+        - pollution
+        - deforestationRate
+        - species
+
+    InterventionInput:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - reforestation
+            - pollution_reduction
+            - species_introduction
+            - habitat_restoration
+            - hunting_ban
+        intensity:
+          type: number
+          minimum: 0
+          maximum: 1
+      required:
+        - type
+        - intensity
+
+    MLPredictions:
+      type: object
+      properties:
+        healthStatus:
+          $ref: "#/components/schemas/HealthStatusEnum"
+        healthScore:
+          type: number
+          minimum: 0
+          maximum: 100
+        recoveryTimeWeeks:
+          type: number
+        collapseRisk:
+          type: number
+          minimum: 0
+          maximum: 1
+        stabilityIndex:
+          type: number
+          minimum: 0
+          maximum: 1
+        recommendations:
+          type: array
+          items:
+            type: string
+      required:
+        - healthStatus
+        - healthScore
+        - recoveryTimeWeeks
+        - collapseRisk
+        - stabilityIndex
+        - recommendations
+
+    Ecosystem:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          $ref: "#/components/schemas/EcosystemType"
+        temperature:
+          type: number
+        rainfall:
+          type: number
+        pollution:
+          type: number
+        deforestationRate:
+          type: number
+        species:
+          type: array
+          items:
+            $ref: "#/components/schemas/Species"
+        predictions:
+          $ref: "#/components/schemas/MLPredictions"
+        interventions:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              intensity:
+                type: number
+              appliedAt:
+                type: string
+            required:
+              - type
+              - intensity
+              - appliedAt
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+      required:
+        - id
+        - name
+        - type
+        - temperature
+        - rainfall
+        - pollution
+        - deforestationRate
+        - species
+        - predictions
+        - interventions
+        - createdAt
+        - updatedAt
+
+    SimulationDataPoint:
+      type: object
+      properties:
+        week:
+          type: integer
+        plants:
+          type: number
+        herbivores:
+          type: number
+        predators:
+          type: number
+        healthScore:
+          type: number
+      required:
+        - week
+        - plants
+        - herbivores
+        - predators
+        - healthScore
+
+    SimulationResult:
+      type: object
+      properties:
+        id:
+          type: string
+        ecosystemId:
+          type: string
+        weeks:
+          type: integer
+        dataPoints:
+          type: array
+          items:
+            $ref: "#/components/schemas/SimulationDataPoint"
+        finalPredictions:
+          $ref: "#/components/schemas/MLPredictions"
+        runAt:
+          type: string
+      required:
+        - id
+        - ecosystemId
+        - weeks
+        - dataPoints
+        - finalPredictions
+        - runAt
+
+    SimulationRunInput:
+      type: object
+      properties:
+        weeks:
+          type: integer
+          minimum: 1
+          maximum: 520
+          default: 52

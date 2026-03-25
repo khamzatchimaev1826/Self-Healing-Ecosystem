@@ -1,0 +1,16 @@
+packages:
+  "framer-motion": "For smooth page transitions and glassmorphism interactive states"
+  "recharts": "For rendering population simulation charts and gauges"
+  "lucide-react": "For UI icons across the application"
+  "clsx": "Utility for constructing className strings conditionally"
+  "tailwind-merge": "Utility to merge Tailwind classes without style conflicts"
+  "date-fns": "For formatting timestamps"
+
+images:
+  - path: "artifacts/ecosystem/public/images/hero-bg.png"
+    description: "A breathtaking highly detailed cyberpunk neon glowing nature landscape. Glowing bioluminescent plants, futuristic digital grid overlay, dark background with vibrant cyan and neon green accents."
+    aspect_ratio: "16:9"
+
+notes:
+  - The application relies on the generated hooks in @workspace/api-client-react
+  - Defaulting to a dark cyberpunk theme for the entire app UI
