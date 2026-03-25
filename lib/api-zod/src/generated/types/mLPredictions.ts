@@ -6,6 +6,7 @@
  * OpenAPI spec version: 0.1.0
  */
 import type { HealthStatusEnum } from "./healthStatusEnum";
+import type { Recommendation } from "./recommendation";
 
 export interface MLPredictions {
   healthStatus: HealthStatusEnum;
@@ -25,5 +26,10 @@ export interface MLPredictions {
    * @maximum 1
    */
   stabilityIndex: number;
-  recommendations: string[];
+  /**
+   * @minimum 0
+   * @maximum 1
+   */
+  biodiversityIndex: number;
+  recommendations: Recommendation[];
 }

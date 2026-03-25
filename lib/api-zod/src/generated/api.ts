@@ -71,6 +71,9 @@ export const listEcosystemsResponsePredictionsCollapseRiskMax = 1;
 export const listEcosystemsResponsePredictionsStabilityIndexMin = 0;
 export const listEcosystemsResponsePredictionsStabilityIndexMax = 1;
 
+export const listEcosystemsResponsePredictionsBiodiversityIndexMin = 0;
+export const listEcosystemsResponsePredictionsBiodiversityIndexMax = 1;
+
 export const ListEcosystemsResponseItem = zod.object({
   id: zod.string(),
   name: zod.string(),
@@ -102,7 +105,18 @@ export const ListEcosystemsResponseItem = zod.object({
       .number()
       .min(listEcosystemsResponsePredictionsStabilityIndexMin)
       .max(listEcosystemsResponsePredictionsStabilityIndexMax),
-    recommendations: zod.array(zod.string()),
+    biodiversityIndex: zod
+      .number()
+      .min(listEcosystemsResponsePredictionsBiodiversityIndexMin)
+      .max(listEcosystemsResponsePredictionsBiodiversityIndexMax),
+    recommendations: zod.array(
+      zod.object({
+        action: zod.string(),
+        priority: zod.enum(["LOW", "MEDIUM", "HIGH", "CRITICAL"]),
+        impact: zod.string(),
+        timeline: zod.string(),
+      }),
+    ),
   }),
   interventions: zod.array(
     zod.object({
@@ -131,6 +145,9 @@ export const getEcosystemResponsePredictionsCollapseRiskMax = 1;
 
 export const getEcosystemResponsePredictionsStabilityIndexMin = 0;
 export const getEcosystemResponsePredictionsStabilityIndexMax = 1;
+
+export const getEcosystemResponsePredictionsBiodiversityIndexMin = 0;
+export const getEcosystemResponsePredictionsBiodiversityIndexMax = 1;
 
 export const GetEcosystemResponse = zod.object({
   id: zod.string(),
@@ -163,7 +180,18 @@ export const GetEcosystemResponse = zod.object({
       .number()
       .min(getEcosystemResponsePredictionsStabilityIndexMin)
       .max(getEcosystemResponsePredictionsStabilityIndexMax),
-    recommendations: zod.array(zod.string()),
+    biodiversityIndex: zod
+      .number()
+      .min(getEcosystemResponsePredictionsBiodiversityIndexMin)
+      .max(getEcosystemResponsePredictionsBiodiversityIndexMax),
+    recommendations: zod.array(
+      zod.object({
+        action: zod.string(),
+        priority: zod.enum(["LOW", "MEDIUM", "HIGH", "CRITICAL"]),
+        impact: zod.string(),
+        timeline: zod.string(),
+      }),
+    ),
   }),
   interventions: zod.array(
     zod.object({
@@ -220,6 +248,9 @@ export const applyInterventionResponsePredictionsCollapseRiskMax = 1;
 export const applyInterventionResponsePredictionsStabilityIndexMin = 0;
 export const applyInterventionResponsePredictionsStabilityIndexMax = 1;
 
+export const applyInterventionResponsePredictionsBiodiversityIndexMin = 0;
+export const applyInterventionResponsePredictionsBiodiversityIndexMax = 1;
+
 export const ApplyInterventionResponse = zod.object({
   id: zod.string(),
   name: zod.string(),
@@ -251,7 +282,18 @@ export const ApplyInterventionResponse = zod.object({
       .number()
       .min(applyInterventionResponsePredictionsStabilityIndexMin)
       .max(applyInterventionResponsePredictionsStabilityIndexMax),
-    recommendations: zod.array(zod.string()),
+    biodiversityIndex: zod
+      .number()
+      .min(applyInterventionResponsePredictionsBiodiversityIndexMin)
+      .max(applyInterventionResponsePredictionsBiodiversityIndexMax),
+    recommendations: zod.array(
+      zod.object({
+        action: zod.string(),
+        priority: zod.enum(["LOW", "MEDIUM", "HIGH", "CRITICAL"]),
+        impact: zod.string(),
+        timeline: zod.string(),
+      }),
+    ),
   }),
   interventions: zod.array(
     zod.object({
@@ -291,6 +333,9 @@ export const runSimulationResponseFinalPredictionsCollapseRiskMax = 1;
 export const runSimulationResponseFinalPredictionsStabilityIndexMin = 0;
 export const runSimulationResponseFinalPredictionsStabilityIndexMax = 1;
 
+export const runSimulationResponseFinalPredictionsBiodiversityIndexMin = 0;
+export const runSimulationResponseFinalPredictionsBiodiversityIndexMax = 1;
+
 export const RunSimulationResponse = zod.object({
   id: zod.string(),
   ecosystemId: zod.string(),
@@ -319,7 +364,18 @@ export const RunSimulationResponse = zod.object({
       .number()
       .min(runSimulationResponseFinalPredictionsStabilityIndexMin)
       .max(runSimulationResponseFinalPredictionsStabilityIndexMax),
-    recommendations: zod.array(zod.string()),
+    biodiversityIndex: zod
+      .number()
+      .min(runSimulationResponseFinalPredictionsBiodiversityIndexMin)
+      .max(runSimulationResponseFinalPredictionsBiodiversityIndexMax),
+    recommendations: zod.array(
+      zod.object({
+        action: zod.string(),
+        priority: zod.enum(["LOW", "MEDIUM", "HIGH", "CRITICAL"]),
+        impact: zod.string(),
+        timeline: zod.string(),
+      }),
+    ),
   }),
   runAt: zod.string(),
 });
@@ -339,6 +395,9 @@ export const getSimulationHistoryResponseFinalPredictionsCollapseRiskMax = 1;
 
 export const getSimulationHistoryResponseFinalPredictionsStabilityIndexMin = 0;
 export const getSimulationHistoryResponseFinalPredictionsStabilityIndexMax = 1;
+
+export const getSimulationHistoryResponseFinalPredictionsBiodiversityIndexMin = 0;
+export const getSimulationHistoryResponseFinalPredictionsBiodiversityIndexMax = 1;
 
 export const GetSimulationHistoryResponseItem = zod.object({
   id: zod.string(),
@@ -368,7 +427,18 @@ export const GetSimulationHistoryResponseItem = zod.object({
       .number()
       .min(getSimulationHistoryResponseFinalPredictionsStabilityIndexMin)
       .max(getSimulationHistoryResponseFinalPredictionsStabilityIndexMax),
-    recommendations: zod.array(zod.string()),
+    biodiversityIndex: zod
+      .number()
+      .min(getSimulationHistoryResponseFinalPredictionsBiodiversityIndexMin)
+      .max(getSimulationHistoryResponseFinalPredictionsBiodiversityIndexMax),
+    recommendations: zod.array(
+      zod.object({
+        action: zod.string(),
+        priority: zod.enum(["LOW", "MEDIUM", "HIGH", "CRITICAL"]),
+        impact: zod.string(),
+        timeline: zod.string(),
+      }),
+    ),
   }),
   runAt: zod.string(),
 });

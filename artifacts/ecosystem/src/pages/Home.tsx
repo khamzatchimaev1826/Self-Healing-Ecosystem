@@ -1,7 +1,7 @@
 import { useListEcosystems, useDeleteEcosystem, getListEcosystemsQueryKey } from "@workspace/api-client-react";
 import { Link } from "wouter";
 import { Layout } from "@/components/Layout";
-import { Leaf, Droplet, Wind, ArrowRight, Trash2, Activity } from "lucide-react";
+import { Leaf, Droplet, Wind, ArrowRight, Trash2, Activity, Globe } from "lucide-react";
 import { motion } from "framer-motion";
 import { useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
@@ -83,7 +83,7 @@ export default function Home() {
             </div>
           ) : ecosystems?.length === 0 ? (
             <div className="text-center py-20 glass-panel rounded-2xl">
-              <Network className="w-16 h-16 text-muted-foreground mx-auto mb-4 opacity-50" />
+              <Globe className="w-16 h-16 text-muted-foreground mx-auto mb-4 opacity-50" />
               <h3 className="text-xl font-display text-white mb-2">NO DATA FOUND</h3>
               <p className="text-muted-foreground">The grid is empty. Initialize a new ecosystem model to begin.</p>
             </div>

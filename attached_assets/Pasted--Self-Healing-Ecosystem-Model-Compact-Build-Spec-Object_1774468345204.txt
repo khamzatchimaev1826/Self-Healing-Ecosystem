@@ -1,0 +1,166 @@
+# 🌍 Self-Healing Ecosystem Model (Compact Build Spec)
+
+## 🎯 Objective
+
+Build a full-stack web app that simulates ecosystem damage, recovery, and collapse using ML + dynamic simulation.
+
+---
+
+## 🧠 Core Features
+
+* Create ecosystems (forest, river, grassland)
+* Select animal species
+* Real-time population simulation
+* Predict:
+
+  * Health status
+  * Recovery time
+  * Collapse risk
+* Apply interventions (reforestation, pollution reduction)
+* Store all data in MongoDB
+
+---
+
+## 🏗️ Tech Stack
+
+**Backend**
+
+* FastAPI (Python)
+* MongoDB + Motor
+* scikit-learn, pandas, numpy
+* Uvicorn
+
+**Frontend**
+
+* React + Vite
+* TailwindCSS (dark theme + neon)
+* Framer Motion (animations)
+* Recharts (graphs)
+* Axios
+
+---
+
+## 🤖 ML Models (5 Total)
+
+1. **Health Classifier (Random Forest)**
+
+   * Input: env + population data
+   * Output: Healthy / Stressed / Collapsing
+
+2. **Recovery Time Predictor (Gradient Boosting)**
+
+   * Input: health + intervention
+   * Output: recovery time (weeks)
+
+3. **Collapse Risk Model (SVM)**
+
+   * Input: biodiversity, stability, pressure
+   * Output: probability (0–1)
+
+4. **Simulation Engine (Lotka-Volterra)**
+
+   * Simulates plants, herbivores, predators over time
+
+5. **Recovery Recommender (Rule-Based)**
+
+   * Suggests actions based on ecosystem state
+
+---
+
+## 🔁 Simulation Logic
+
+* Plants grow logistically
+* Herbivores depend on plants
+* Predators depend on herbivores
+* Pollution & deforestation reduce all populations
+
+---
+
+## 💾 Dataset
+
+* Generate synthetic data (10k rows)
+* Features:
+
+  * temperature, rainfall
+  * plant_population, herbivores, predators
+  * pollution, deforestation_rate
+* Output:
+
+  * health_score + health_status
+
+---
+
+## 🌐 API Endpoints
+
+* `POST /ecosystems` → create ecosystem
+* `GET /ecosystems` → list all
+* `GET /ecosystems/{id}` → details
+* `PUT /ecosystems/{id}/intervene` → apply actions
+* `POST /simulation/{id}/run` → simulate
+
+---
+
+## 🖥️ Frontend Pages
+
+1. **Home**
+
+   * Intro + features
+
+2. **Builder**
+
+   * Inputs + sliders + species selection
+
+3. **Dashboard**
+
+   * Health score
+   * Stability
+   * ML predictions
+
+4. **Simulation**
+
+   * Live population graphs
+
+5. **Analysis**
+
+   * Risk + recommendations
+
+---
+
+## 🎨 UI Design
+
+* Dark theme
+* Neon colors (green, cyan)
+* Glass morphism
+* Smooth animations
+
+---
+
+## ⚙️ Key Outputs
+
+* Health Score (0–100)
+* Stability Index (0–1)
+* Collapse Probability
+* Population graphs
+
+---
+
+## 🚀 Setup Steps
+
+1. Backend: FastAPI + install requirements
+2. Train ML models
+3. Start MongoDB
+4. Run backend (port 8000)
+5. Run frontend (port 5173)
+
+---
+
+## 🏆 Final Result
+
+A real-time ecosystem simulation platform with:
+
+* ML predictions
+* dynamic population modeling
+* interactive web UI
+* persistent storage
+
+---

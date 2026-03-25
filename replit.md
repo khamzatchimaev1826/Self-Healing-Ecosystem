@@ -63,12 +63,14 @@ artifacts-monorepo/
 - `GET /api/simulation/:id/history` — get simulation history
 
 ### ML Engine (`artifacts/api-server/src/lib/ecosystemML.ts`)
-- **Health Classifier**: Computes score from env params + populations → Healthy/Stressed/Collapsing
-- **Recovery Time Predictor**: Gradient-like model based on health deficit × pressure factors
-- **Collapse Risk Estimator**: Biodiversity + pressure score combination
-- **Stability Index**: Based on plant/herbivore/predator ratios
-- **Recovery Recommender**: Rule-based recommendations from ecosystem state
-- **Lotka-Volterra Simulation**: Differential equations for predator-prey dynamics
+5 ML models matching the project spec:
+1. **Health Classifier** (Random Forest-inspired): Score from 100 with penalties for temperature (optimal 20–30°C), rainfall (500–1500mm), pollution (>70% critical), deforestation. Biodiversity bonus. Thresholds: ≥70 Healthy, 40–70 Stressed, <40 Collapsing
+2. **Recovery Time Predictor** (Gradient Boosting-inspired): Health deficit × pollution × deforestation × biodiversity factors
+3. **Collapse Risk Model** (SVM-inspired): Base risk (5%/30%/85%) + external pressure + biodiversity adjustments
+4. **Stability Index**: Population evenness across plants/herbivores/predators (spec formula)
+5. **Recovery Recommender** (Rule-based): Structured `Recommendation` objects with `action`, `priority` (CRITICAL/HIGH/MEDIUM/LOW), `impact`, `timeline`
+- **Lotka-Volterra Simulation**: 10 dt=0.1 steps per week; plant logistic growth; herbivore/predator Lotka-Volterra equations with env modifiers
+- **Biodiversity Index**: Normalized average trophic level coverage (0–1)
 
 ## Database Schema (`lib/db/src/schema/ecosystems.ts`)
 

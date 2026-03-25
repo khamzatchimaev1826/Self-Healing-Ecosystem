@@ -16,6 +16,8 @@ export * from "./healthStatusEnum";
 export * from "./interventionInput";
 export * from "./interventionInputType";
 export * from "./mLPredictions";
+export * from "./recommendation";
+export * from "./recommendationPriority";
 export * from "./simulationDataPoint";
 export * from "./simulationResult";
 export * from "./simulationRunInput";

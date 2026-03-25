@@ -3,7 +3,7 @@ import { useRoute } from "wouter";
 import { useGetEcosystem, useRunSimulation, useGetSimulationHistory, getGetSimulationHistoryQueryKey } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { Layout } from "@/components/Layout";
-import { Play, History, TrendingUp } from "lucide-react";
+import { Play, History, TrendingUp, Activity } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, Legend } from "recharts";
 import { format } from "date-fns";
 

@@ -292,6 +292,27 @@ components:
         - type
         - intensity
 
+    RecommendationPriority:
+      type: string
+      enum: [LOW, MEDIUM, HIGH, CRITICAL]
+
+    Recommendation:
+      type: object
+      properties:
+        action:
+          type: string
+        priority:
+          $ref: "#/components/schemas/RecommendationPriority"
+        impact:
+          type: string
+        timeline:
+          type: string
+      required:
+        - action
+        - priority
+        - impact
+        - timeline
+
     MLPredictions:
       type: object
       properties:
@@ -311,16 +332,21 @@ components:
           type: number
           minimum: 0
           maximum: 1
+        biodiversityIndex:
+          type: number
+          minimum: 0
+          maximum: 1
         recommendations:
           type: array
           items:
-            type: string
+            $ref: "#/components/schemas/Recommendation"
       required:
         - healthStatus
         - healthScore
         - recoveryTimeWeeks
         - collapseRisk
         - stabilityIndex
+        - biodiversityIndex
         - recommendations
 
     Ecosystem:

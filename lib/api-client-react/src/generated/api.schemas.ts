@@ -95,6 +95,23 @@ export interface InterventionInput {
   intensity: number;
 }
 
+export type RecommendationPriority =
+  (typeof RecommendationPriority)[keyof typeof RecommendationPriority];
+
+export const RecommendationPriority = {
+  LOW: "LOW",
+  MEDIUM: "MEDIUM",
+  HIGH: "HIGH",
+  CRITICAL: "CRITICAL",
+} as const;
+
+export interface Recommendation {
+  action: string;
+  priority: RecommendationPriority;
+  impact: string;
+  timeline: string;
+}
+
 export interface MLPredictions {
   healthStatus: HealthStatusEnum;
   /**
@@ -113,7 +130,12 @@ export interface MLPredictions {
    * @maximum 1
    */
   stabilityIndex: number;
-  recommendations: string[];
+  /**
+   * @minimum 0
+   * @maximum 1
+   */
+  biodiversityIndex: number;
+  recommendations: Recommendation[];
 }
 
 export type EcosystemInterventionsItem = {

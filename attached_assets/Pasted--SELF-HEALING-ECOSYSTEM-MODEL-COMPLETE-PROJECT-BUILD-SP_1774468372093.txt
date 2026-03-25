@@ -1,0 +1,889 @@
+🌍 SELF-HEALING ECOSYSTEM MODEL - COMPLETE PROJECT BUILD SPECIFICATION
+📋 EXECUTIVE SUMMARY
+Build a production-grade, government-level full-stack web application for simulating, monitoring, and predicting ecosystem health using 5 machine learning models. The system provides real-time population dynamics simulation, recovery strategy recommendations, and collapse risk assessment with a beautiful dark-themed UI featuring neon accents and smooth animations.
+🎯 PROJECT OBJECTIVES
+Create an intuitive web interface for building and managing multiple ecosystems
+Implement 5 ML models for health prediction, recovery estimation, and risk assessment
+Provide real-time dynamic simulation using Lotka-Volterra equations
+Store all ecosystem data persistently in MongoDB
+Deliver a polished, responsive UI with government-level reliability
+Enable animal species selection during ecosystem creation
+Support forest, river, and grassland ecosystem types
+🏗️ COMPLETE TECHNOLOGY STACK
+Backend Technologies
+Runtime: Python 3.9 or higher
+Web Framework: FastAPI 0.104+ (async support)
+Database: MongoDB 6.0+ (local or Atlas)
+MongoDB Driver: Motor 3.3+ (async driver)
+Data Validation: Pydantic 2.5+
+ML Libraries: scikit-learn 1.3+, pandas 2.1+, numpy 1.26+
+Model Persistence: joblib 1.3+
+Environment Variables: python-dotenv 1.0+
+Server: Uvicorn 0.24+ (ASGI server)
+Frontend Technologies
+Framework: React 18.2+
+Build Tool: Vite 5.0+ (ES modules)
+Styling: TailwindCSS 3.3+ with custom config
+Animations: Framer Motion 10.16+
+Routing: React Router DOM 6.19+
+HTTP Client: Axios 1.6+
+Charts: Recharts 2.10+
+Icons: React Icons 4.12+
+State Management: React Context API + useReducer
+Development Environment
+OS: Windows 10/11 (or Linux/Mac)
+Code Editor: VS Code with Python, ESLint, Prettier extensions
+Package Managers: npm 9+ (frontend), pip 23+ (backend)
+Version Control: Git (optional)
+Database GUI: MongoDB Compass (optional)
+🎨 DESIGN SYSTEM & VISUAL IDENTITY
+Color Palette (Dark Theme)
+css
+/* Background Colors */
+--bg-primary: #0a0e1a;          /* Main background - deep space blue */
+--bg-secondary: #1a1f3a;        /* Card backgrounds - lighter navy */
+--bg-tertiary: #2d3748;         /* Borders and dividers */
+
+/* Accent Colors */
+--primary: #00ff88;             /* Neon green - main action color */
+--secondary: #00d4ff;           /* Cyan - secondary actions */
+--accent: #ff6b35;              /* Orange - warnings/highlights */
+
+/* Status Colors */
+--success: #2ecc71;             /* Healthy states */
+--warning: #f39c12;             /* Caution states */
+--danger: #e74c3c;              /* Critical states */
+--info: #3498db;                /* Information states */
+
+/* Text Colors */
+--text-primary: #ffffff;        /* Main text */
+--text-secondary: #a0aec0;      /* Muted text */
+--text-tertiary: #718096;       /* Disabled text */
+Typography
+Font Family: Inter (Google Fonts)
+Weights: 300 (light), 400 (regular), 500 (medium), 600 (semibold), 700 (bold)
+Heading Sizes:
+h1: 3rem (48px)
+h2: 2.25rem (36px)
+h3: 1.5rem (24px)
+h4: 1.25rem (20px)
+Visual Effects
+Glass Morphism: backdrop-filter: blur(10px); background: rgba(26, 31, 58, 0.7);
+Neon Glow: box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+Gradient Text: background: linear-gradient(135deg, #00ff88, #00d4ff); -webkit-background-clip: text;
+Smooth Transitions: transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+📁 DETAILED PROJECT STRUC                                                                                           🤖 MACHINE LEARNING MODELS - DETAILED SPECIFICATIONS
+Model 1: Health Classifier (Random Forest)
+Purpose: Classify ecosystem health status based on environmental parametersInput Features:
+temperature (°C): 15-45
+rainfall (mm): 200-3000
+plant_population: 10-100
+herbivores: 5-100
+predators: 2-50
+pollution (%): 0-100
+deforestation_rate (%/year): 0-10
+Output Classes:
+"Healthy" (health_score ≥ 70)
+"Stressed" (40 ≤ health_score < 70)
+"Collapsing" (health_score < 40)
+Implementation:
+python
+from sklearn.ensemble import RandomForestClassifier
+
+class HealthClassifier:
+    def __init__(self):
+        self.model = RandomForestClassifier(
+            n_estimators=100,
+            max_depth=10,
+            random_state=42
+        )
+    
+    def train(self, X_train, y_train):
+        self.model.fit(X_train, y_train)
+    
+    def predict(self, features):
+        prediction = self.model.predict([features])[0]
+        confidence = max(self.model.predict_proba([features])[0])
+        return {"status": prediction, "confidence": round(confidence, 2)}
+Model 2: Recovery Time Predictor (Gradient Boosting)
+Purpose: Estimate time required for ecosystem to recover after interventionInput Features:
+current_health_score: 0-100
+intervention_type: "reforestation", "pollution_reduction", "species_reintroduction"
+ecosystem_type: "forest", "river", "grassland"
+biodiversity_index: 0-1
+Output:
+Recovery time in weeks (continuous value)
+Implementation:
+python
+from sklearn.ensemble import GradientBoostingRegressor
+
+class RecoveryTimePredictor:
+    def __init__(self):
+        self.model = GradientBoostingRegressor(
+            n_estimators=100,
+            learning_rate=0.1,
+            max_depth=5
+        )
+    
+    def predict(self, features):
+        weeks = self.model.predict([features])[0]
+        return {"recovery_time_weeks": round(weeks, 1)}
+Model 3: Collapse Risk Model (SVM)
+Purpose: Calculate probability of ecosystem collapse within next timeframeInput Features:
+biodiversity_index: 0-1
+stability_index: 0-1
+external_pressure: 0-100
+health_trend: -1 to +1 (declining/improving)
+Output:
+Collapse probability: 0.0 to 1.0
+Implementation:
+python
+from sklearn.svm import SVC
+
+class CollapseRiskModel:
+    def __init__(self):
+        self.model = SVC(
+            kernel='rbf',
+            probability=True,
+            random_state=42
+        )
+    
+    def predict_probability(self, features):
+        probs = self.model.predict_proba([features])[0]
+        return {"collapse_probability": round(probs[1], 3)}
+Model 4: Dynamic Simulation Engine (Lotka-Volterra Equations)
+Purpose: Simulate real-time population dynamics using differential equationsMathematical Model:
+plaintext
+dx/dt = αx - βxy  (Prey population change)
+dy/dt = δxy - γy  (Predator population change)
+
+Where:
+- x = prey population
+- y = predator population
+- α = prey growth rate
+- β = predation rate
+- δ = predator growth from prey
+- γ = predator death rate
+Implementation:
+python
+import numpy as np
+
+class SimulationEngine:
+    def __init__(self, ecosystem_data):
+        self.plants = ecosystem_data['plant_population']
+        self.herbivores = ecosystem_data['herbivores']
+        self.predators = ecosystem_data['predators']
+        self.temperature = ecosystem_data['temperature']
+        self.rainfall = ecosystem_data['rainfall']
+    
+    def simulate_step(self, dt=0.1):
+        # Plant growth (logistic)
+        plant_growth = 0.5 * self.plants * (1 - self.plants / 100)
+        plant_consumption = 0.02 * self.herbivores * self.plants
+        self.plants += (plant_growth - plant_consumption) * dt
+        
+        # Herbivore dynamics
+        herb_growth = 0.03 * self.plants * self.herbivores
+        herb_death = 0.1 * self.herbivores * self.predators
+        self.herbivores += (herb_growth - herb_death) * dt
+        
+        # Predator dynamics
+        pred_growth = 0.02 * self.herbivores * self.predators
+        pred_death = 0.15 * self.predators
+        self.predators += (pred_growth - pred_death) * dt
+        
+        # Ensure non-negative populations
+        self.plants = max(0, self.plants)
+        self.herbivores = max(0, self.herbivores)
+        self.predators = max(0, self.predators)
+        
+        return {
+            'plants': round(self.plants, 2),
+            'herbivores': round(self.herbivores, 2),
+            'predators': round(self.predators, 2)
+        }
+    
+    def calculate_health_score(self):
+        # Weighted combination of factors
+        biodiversity = min(1, (self.plants + self.herbivores + self.predators) / 150)
+        temp_factor = 1 - abs(self.temperature - 25) / 25
+        rain_factor = min(1, self.rainfall / 1000)
+        
+        health = (biodiversity * 0.4 + temp_factor * 0.3 + rain_factor * 0.3) * 100
+        return round(min(100, max(0, health)), 2)
+    
+    def calculate_stability_index(self):
+        total_pop = self.plants + self.herbivores + self.predators
+        if total_pop == 0:
+            return 0
+        
+        evenness = 1 - (abs(self.plants - self.herbivores) + 
+                       abs(self.herbivores - self.predators)) / total_pop
+        return round(max(0, min(1, evenness)), 2)
+    
+    def calculate_collapse_probability(self):
+        health = self.calculate_health_score()
+        if health > 70:
+            return 0.05
+        elif health > 40:
+            return 0.3
+        else:
+            return 0.85
+Model 5: Recovery Strategy Recommender (Rule-Based System)
+Purpose: Generate context-aware recommendations for ecosystem recoveryRules Engine:
+python
+class RecoveryStrategyRecommender:
+    def recommend(self, ecosystem_state):
+        recommendations = []
+        
+        health = ecosystem_state['health_score']
+        pollution = ecosystem_state['pollution']
+        deforestation = ecosystem_state['deforestation_rate']
+        biodiversity = ecosystem_state.get('biodiversity_index', 0.5)
+        
+        # Pollution-based recommendations
+        if pollution > 70:
+            recommendations.append({
+                'action': 'Reduce Pollution',
+                'priority': 'HIGH',
+                'impact': 'Immediate improvement in health score',
+                'timeline': '2-4 weeks'
+            })
+        
+        # Deforestation recommendations
+        if deforestation > 3:
+            recommendations.append({
+                'action': 'Implement Reforestation Program',
+                'priority': 'CRITICAL',
+                'impact': 'Restore plant population and prevent collapse',
+                'timeline': '3-6 months'
+            })
+        
+        # Biodiversity recommendations
+        if biodiversity < 0.4:
+            recommendations.append({
+                'action': 'Species Reintroduction',
+                'priority': 'MEDIUM',
+                'impact': 'Improve ecosystem resilience',
+                'timeline': '1-3 months'
+            })
+        
+        # Health-based recommendations
+        if health < 40:
+            recommendations.append({
+                'action': 'Emergency Intervention Required',
+                'priority': 'CRITICAL',
+                'impact': 'Prevent imminent ecosystem collapse',
+                'timeline': 'Immediate'
+            })
+        
+        return recommendations
+💾 DATASET GENERATION - COMPLETE SPECIFICATION
+Generate synthetic training data with realistic ecosystem dynamics:
+python
+import numpy as np
+import pandas as pd
+
+def generate_ecosystem_dataset(n_samples=10000):
+    np.random.seed(42)
+    
+    # Generate features
+    temperature = np.random.uniform(15, 45, n_samples)
+    rainfall = np.random.uniform(200, 3000, n_samples)
+    plant_population = np.random.uniform(10, 100, n_samples)
+    herbivores = np.random.uniform(5, 100, n_samples)
+    predators = np.random.uniform(2, 50, n_samples)
+    pollution = np.random.uniform(0, 100, n_samples)
+    deforestation_rate = np.random.uniform(0, 10, n_samples)
+    
+    # Calculate health scores based on realistic rules
+    health_scores = []
+    for i in range(n_samples):
+        score = 100
+        
+        # Temperature impact (optimal: 20-30°C)
+        if temperature[i] > 35:
+            score -= (temperature[i] - 35) * 2
+        elif temperature[i] < 20:
+            score -= (20 - temperature[i]) * 1.5
+        
+        # Rainfall impact (optimal: 500-1500mm)
+        if rainfall[i] < 500:
+            score -= (500 - rainfall[i]) / 100 * 3
+        elif rainfall[i] > 2000:
+            score -= (rainfall[i] - 2000) / 100 * 2
+        
+        # Pollution impact
+        if pollution[i] > 70:
+            score -= (pollution[i] - 70) * 3
+        
+        # Deforestation impact
+        score -= deforestation_rate[i] * 5
+        
+        # Biodiversity bonus
+        if all([plant_population[i] > 30, herbivores[i] > 20, predators[i] > 5]):
+            score += 10
+        
+        health_scores.append(max(0, min(100, score)))
+    
+    # Determine health status
+    health_status = []
+    for score in health_scores:
+        if score >= 70:
+            health_status.append('Healthy')
+        elif score >= 40:
+            health_status.append('Stressed')
+        else:
+            health_status.append('Collapsing')
+    
+    # Create DataFrame
+    df = pd.DataFrame({
+        'temperature': temperature,
+        'rainfall': rainfall,
+        'plant_population': plant_population,
+        'herbivores': herbivores,
+        'predators': predators,
+        'pollution': pollution,
+        'deforestation_rate': deforestation_rate,
+        'health_score': health_scores,
+        'health_status': health_status
+    })
+    
+    return df
+
+# Generate and save dataset
+df = generate_ecosystem_dataset(10000)
+df.to_csv('ecosystem_training_data.csv', index=False)
+🌐 BACKEND API ENDPOINTS - COMPLETE DOCUMENTATION
+Base URL: http://localhost:8000/api
+1. Create Ecosystem
+http
+POST /ecosystems/
+Content-Type: application/json
+
+{
+  "name": "Amazon Rainforest",
+  "ecosystem_type": "forest",
+  "plant_population": 75,
+  "herbivores": 40,
+  "predators": 15,
+  "temperature": 27,
+  "rainfall": 2200,
+  "pollution": 15,
+  "deforestation_rate": 2.5,
+  "animal_species": ["jaguar", "macaw", "tapir"]
+}
+
+Response 201 Created:
+{
+  "id": "uuid-string",
+  "name": "Amazon Rainforest",
+  "ecosystem_type": "forest",
+  "health_score": 85.3,
+  "stability_index": 0.78,
+  "collapse_probability": 0.12,
+  "created_at": "2024-03-25T12:00:00Z"
+}
+2. Get All Ecosystems
+http
+GET /ecosystems/
+
+Response 200 OK:
+[
+  {
+    "id": "uuid-1",
+    "name": "Amazon Rainforest",
+    "health_score": 85.3,
+    "stability_index": 0.78,
+    "collapse_probability": 0.12
+  },
+  {
+    "id": "uuid-2",
+    "name": "Serengeti Plains",
+    "health_score": 72.1,
+    "stability_index": 0.65,
+    "collapse_probability": 0.18
+  }
+]
+3. Get Ecosystem Details
+http
+GET /ecosystems/{id}
+
+Response 200 OK:
+{
+  "id": "uuid-1",
+  "name": "Amazon Rainforest",
+  "ecosystem_type": "forest",
+  "plant_population": 75,
+  "herbivores": 40,
+  "predators": 15,
+  "temperature": 27,
+  "rainfall": 2200,
+  "pollution": 15,
+  "deforestation_rate": 2.5,
+  "animal_species": ["jaguar", "macaw", "tapir"],
+  "health_score": 85.3,
+  "stability_index": 0.78,
+  "collapse_probability": 0.12,
+  "ml_predictions": {
+    "health_status": "Healthy",
+    "confidence": 0.94,
+    "recovery_time_weeks": null
+  }
+}
+4. Apply Intervention
+http
+PUT /ecosystems/{id}/intervene
+Content-Type: application/json
+
+{
+  "intervention_type": "reforestation",
+  "magnitude": 20
+}
+
+Response 200 OK:
+{
+  "message": "Intervention applied successfully",
+  "new_health_score": 88.5,
+  "new_stability_index": 0.82
+}
+5. Run Simulation
+http
+POST /simulation/{id}/run
+Content-Type: application/json
+
+{
+  "speed": 2,
+  "duration": 100
+}
+
+Response 200 OK (streaming via WebSocket or SSE):
+{
+  "step": 1,
+  "timestamp": "2024-03-25T12:05:00Z",
+  "populations": {
+    "plants": 76.2,
+    "herbivores": 41.5,
+    "predators": 15.3
+  },
+  "metrics": {
+    "health_score": 86.1,
+    "stability_index": 0.79
+  }
+}
+🎮 FRONTEND PAGES - DETAILED IMPLEMENTATION
+Page 1: Home (/)
+Purpose: Landing page showcasing application featuresComponents:
+Hero section with animated leaf icon (Framer Motion)
+6 feature cards in responsive grid
+Stats counter animation (ecosystems created, predictions made)
+Call-to-action buttons ("Create Ecosystem", "Learn More")
+Key Animations:
+jsx
+<motion.div
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6 }}
+>
+  <FaLeaf className="text-9xl text-primary mx-auto mb-6 animate-bounce" />
+  <h1 className="text-6xl font-bold gradient-text mb-6">
+    Self-Healing Ecosystem Model
+  </h1>
+</motion.div>
+Page 2: Builder (/builder)
+Purpose: Multi-step ecosystem creation wizardStep 1 - Basic Info:
+Name input (text field)
+Ecosystem type selector (forest/river/grassland cards)
+Visual preview of selected type
+Step 2 - Environmental Parameters:
+7 sliders with real-time value display:
+Temperature (15-45°C)
+Rainfall (200-3000mm)
+Plant Population (10-100)
+Herbivores (5-100)
+Predators (2-50)
+Pollution (0-100%)
+Deforestation Rate (0-10%/year)
+Step 3 - Animal Species Selection:
+Toggle cards for each species
+Grouped by ecosystem type and role:
+Forest Herbivores: Deer, Rabbit, Squirrel
+Forest Predators: Wolf, Bear, Fox
+River Species: Fish, Otter, Heron
+Grassland Species: Bison, Prairie Dog, Hawk
+Submit Action:
+POST to /api/ecosystems/
+On success: redirect to /dashboard/:id
+On error: show alert with message
+Page 3: Dashboard (/dashboard/:id)
+Purpose: Real-time ecosystem health overviewTop Section - Key Metrics:
+Health Score Gauge (circular progress, color-coded)
+Stability Index Meter (0-1 scale)
+Collapse Probability Warning (blinking if > 0.5)
+Middle Section - Detailed Metrics:
+2x3 grid of stat cards:
+Temperature (with trend arrow)
+Rainfall (monthly average)
+Plant Population (current/max)
+Herbivores (population graph)
+Predators (population graph)
+Biodiversity Index (radar chart)
+Bottom Section - ML Predictions:
+Health Status badge (Healthy/Stressed/Collapsing)
+Confidence percentage
+Recovery Time estimate (if applicable)
+Risk Factors list
+Action Buttons:
+"Run Simulation" → /simulation/:id
+"View Analysis" → /analysis/:id
+"Apply Intervention" → opens modal
+Page 4: Simulation (/simulation/:id)
+Purpose: Watch ecosystem dynamics evolve in real-timeControl Panel:
+Speed selector: 1x, 2x, 5x, 10x (button group)
+Start/Pause toggle
+Reset button
+Step counter display
+Main Visualization:
+Large line chart (Recharts) showing:
+X-axis: Time steps (0 to current)
+Y-axis: Population count
+3 lines: Plants (green), Herbivores (blue), Predators (red)
+Interactive tooltips
+Zoom and pan controls
+Live Metrics Panel:
+Real-time updating cards:
+Current populations
+Health score
+Stability index
+Birth/death rates
+WebSocket Integration (Optional):
+javascript
+const ws = new WebSocket('ws://localhost:8000/ws/simulation/{id}');
+
+ws.onmessage = (event) => {
+  const data = JSON.parse(event.data);
+  setPopulations(data.populations);
+  setMetrics(data.metrics);
+};
+Page 5: Analysis (/analysis/:id)
+Purpose: AI-powered insights and recommendationsSection 1 - Health Trend:
+Line chart showing health score over time
+Trend indicator (↑ improving, ↓ declining)
+Projection for next 30 days
+Section 2 - Risk Assessment:
+Breakdown of risk factors:
+High pollution level
+Low biodiversity
+Unstable population dynamics
+External pressures
+Section 3 - Recommendations:
+Prioritized list of interventions:
+jsx
+{recommendations.map((rec, idx) => (
+  <Card key={idx} priority={rec.priority}>
+    <h3>{rec.action}</h3>
+    <p>{rec.impact}</p>
+    <Badge>{rec.timeline}</Badge>
+  </Card>
+))}
+Section 4 - Export Options:
+Download PDF report
+Export CSV data
+Share link button
+⚙️ CONFIGURATION FILES - EXACT CONTENTS
+backend/.env
+env
+MONGODB_URI=mongodb://localhost:27017
+DB_NAME=self_healing_ecosystem
+CORS_ORIGINS=http://localhost:5173
+DEBUG=true
+backend/requirements.txt
+txt
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+motor==3.3.2
+pydantic==2.5.0
+pydantic-settings==2.1.0
+python-dotenv==1.0.0
+scikit-learn==1.3.2
+pandas==2.1.3
+numpy==1.26.2
+joblib==1.3.2
+python-multipart==0.0.6
+frontend/package.json
+json
+{
+  "name": "self-healing-ecosystem-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint src --ext js,jsx"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.19.0",
+    "axios": "^1.6.2",
+    "framer-motion": "^10.16.4",
+    "recharts": "^2.10.3",
+    "react-icons": "^4.12.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.2.0",
+    "vite": "^5.0.0",
+    "tailwindcss": "^3.3.5",
+    "postcss": "^8.4.32",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^8.55.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0"
+  }
+}
+frontend/vite.config.js
+javascript
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    port: 5173,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8000',
+        changeOrigin: true
+      }
+    }
+  },
+  build: {
+    outDir: 'dist',
+    sourcemap: true
+  }
+})
+frontend/tailwind.config.js
+javascript
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        primary: '#00ff88',
+        secondary: '#00d4ff',
+        accent: '#ff6b35',
+        'dark-bg': '#0a0e1a',
+        'dark-card': '#1a1f3a',
+        'dark-border': '#2d3748',
+        success: '#2ecc71',
+        warning: '#f39c12',
+        danger: '#e74c3c',
+        info: '#3498db'
+      },
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif']
+      },
+      animation: {
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'bounce-slow': 'bounce 2s infinite'
+      },
+      backdropBlur: {
+        xs: '2px'
+      }
+    },
+  },
+  plugins: [],
+}
+frontend/postcss.config.js
+javascript
+export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+frontend/src/index.css
+css
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #00ff88;
+  --secondary: #00d4ff;
+  --accent: #ff6b35;
+  --bg-primary: #0a0e1a;
+  --bg-secondary: #1a1f3a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-primary);
+  color: white;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary);
+}
+
+/* Glass Morphism Effect */
+.glass {
+  background: rgba(26, 31, 58, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Neon Glow Effect */
+.neon-green {
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+}
+
+.neon-blue {
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+}
+
+/* Smooth Transitions */
+.transition-all {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+🚀 COMPLETE SETUP INSTRUCTIONS
+Step 1: Create Project Folder
+bash
+mkdir self-healing-ecosystem-model
+cd self-healing-ecosystem-model
+Step 2: Setup Backend
+bash
+mkdir backend
+cd backend
+python -m venv venv
+venv\Scripts\activate  # Windows
+# source venv/bin/activate  # Linux/Mac
+
+# Create requirements.txt with contents above
+pip install -r requirements.txt
+
+# Create .env file with contents above
+# Create app/ directory structure
+# Copy all backend code files
+Step 3: Setup Frontend
+bash
+cd ..
+npm create vite@latest frontend -- --template react
+cd frontend
+
+# Install dependencies
+npm install
+
+# Install additional packages
+npm install react-router-dom axios framer-motion recharts react-icons
+npm install -D tailwindcss postcss autoprefixer
+
+# Initialize Tailwind
+npx tailwindcss init -p
+
+# Replace config files with contents above
+# Copy all frontend source files
+Step 4: Start MongoDB
+bash
+# Windows (if installed as service)
+net start MongoDB
+
+# Or run mongod manually
+mongod --dbpath C:\data\db
+Step 5: Train ML Models
+bash
+cd backend
+python -m app.services.model_trainer
+Step 6: Start Servers
+bash
+# Terminal 1 - Backend
+cd backend
+venv\Scripts\activate
+python -m uvicorn app.main:app --reload --port 8000
+
+# Terminal 2 - Frontend
+cd frontend
+npm run dev
+Step 7: Access Application
+Frontend: http://localhost:5173
+Backend API: http://localhost:8000
+API Docs: http://localhost:8000/docs
+✅ QUALITY ASSURANCE CHECKLIST
+Backend Requirements
+✅ All 5 ML models trained and saved
+✅ MongoDB connection working
+✅ All API endpoints tested
+✅ CORS configured correctly
+✅ Error handling implemented
+✅ Data validation with Pydantic
+✅ Async operations where needed
+Frontend Requirements
+✅ All 5 pages functional
+✅ Responsive design (mobile/tablet/desktop)
+✅ Smooth animations (60 FPS)
+✅ No console errors
+✅ API integration working
+✅ State management correct
+✅ Loading states implemented
+✅ Error handling user-friendly
+UI/UX Requirements
+✅ Dark theme consistent
+✅ Neon accent colors used appropriately
+✅ Glass morphism effects applied
+✅ Gradient text on headings
+✅ Hover effects on interactive elements
+✅ Smooth page transitions
+✅ Mobile navigation working
+✅ Accessibility (ARIA labels, keyboard nav)
+🎯 FINAL DELIVERABLE FEATURES
+✅ Multi-Ecosystem Support - Create forests, rivers, grasslands
+✅ Animal Species Selection - Choose specific animals per type
+✅ Real-Time Simulation - Watch populations evolve dynamically
+✅ ML-Powered Insights - 5 models providing predictions
+✅ MongoDB Persistence - All data saved permanently
+✅ Beautiful Dark UI - Government-level polish
+✅ Smooth Animations - Framer Motion throughout
+✅ Responsive Design - Works on all devices
+✅ Error Handling - Graceful failures
+✅ Live Updates - Real-time metric changes
