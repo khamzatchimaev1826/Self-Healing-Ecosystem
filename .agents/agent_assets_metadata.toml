@@ -6,3 +6,9 @@ id = "5rAGHSFTQom8_eMUnEm-h"
 uri = "file://.local/outputs/Self-Healing-Model.pptx"
 type = "slides"
 title = "Self Healing Model.pptx"
+
+[[outputs]]
+id = "us8YnoFuTzHg3usnsS_sd"
+uri = "file://.local/outputs/Self-Healing-Model.pdf"
+type = "pdf"
+title = "Self Healing Model.pdf"
