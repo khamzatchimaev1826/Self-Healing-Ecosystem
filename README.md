@@ -1,8 +1,10 @@
-# 🌿 Self-Healing Ecosystem Model
+# 🌿 Self Healing Ecosystems
 
-🔗 **Live Demo:** After you deploy, put your public URL here (see [DEPLOY.md](./DEPLOY.md))
+🔗 **Live App:** _Deploy via [DEPLOY.md](./DEPLOY.md) — then add your URL here_
 
-_Example (legacy): [self-healing-model--khamzatchimaev1.replit.app](https://self-healing-model--khamzatchimaev1.replit.app)_
+🔗 **Repository:** [github.com/khamzatchimaev1826/Self-Healing-Ecosystems](https://github.com/khamzatchimaev1826/Self-Healing-Ecosystems)
+
+_Example (legacy Replit): [self-healing-model--khamzatchimaev1.replit.app](https://self-healing-model--khamzatchimaev1.replit.app)_
 
 A full-stack Machine Learning powered web application that simulates ecosystem dynamics, predicts ecological health, and recommends interventions for forest, river, grassland, and polar biomes.
 
