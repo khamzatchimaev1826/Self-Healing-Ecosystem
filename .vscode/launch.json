@@ -1,0 +1,31 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "API Server",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["run", "dev:api"],
+      "envFile": "${workspaceFolder}/.env",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Frontend (Vite)",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["run", "dev:web"],
+      "console": "integratedTerminal"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Full Stack (API + Frontend)",
+      "configurations": ["API Server", "Frontend (Vite)"],
+      "preLaunchTask": "db:push"
+    }
+  ]
+}

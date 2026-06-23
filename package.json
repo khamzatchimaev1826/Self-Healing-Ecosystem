@@ -3,13 +3,20 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "preinstall": "sh -c 'rm -f package-lock.json yarn.lock; case \"$npm_config_user_agent\" in pnpm/*) ;; *) echo \"Use pnpm instead\" >&2; exit 1 ;; esac'",
+    "preinstall": "node -e \"const fs=require('fs');['package-lock.json','yarn.lock'].forEach(f=>{try{fs.unlinkSync(f)}catch{}});if(!process.env.npm_config_user_agent?.startsWith('pnpm')){console.error('Use pnpm instead');process.exit(1)}\"",
     "build": "pnpm run typecheck && pnpm -r --if-present run build",
     "typecheck:libs": "tsc --build",
-    "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/**\" --filter \"./scripts\" --if-present run typecheck"
+    "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/**\" --filter \"./scripts\" --if-present run typecheck",
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down",
+    "db:push": "dotenv -e .env -- pnpm --filter @workspace/db run push",
+    "dev:api": "dotenv -e .env -- pnpm --filter @workspace/api-server run dev",
+    "dev:web": "dotenv -e .env -- pnpm --filter @workspace/ecosystem run dev",
+    "setup": "pnpm install && pnpm run db:up && node -e \"setTimeout(()=>{},8000)\" && pnpm run db:push"
   },
   "private": true,
   "devDependencies": {
+    "dotenv-cli": "^8.0.0",
     "typescript": "~5.9.2",
     "prettier": "^3.8.1"
   }

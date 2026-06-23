@@ -1,0 +1,54 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "db:up",
+      "type": "shell",
+      "command": "pnpm run db:up",
+      "problemMatcher": []
+    },
+    {
+      "label": "db:push",
+      "type": "shell",
+      "command": "pnpm run db:push",
+      "dependsOn": ["db:up"],
+      "problemMatcher": []
+    },
+    {
+      "label": "dev:api",
+      "type": "shell",
+      "command": "pnpm run dev:api",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "ecosystem-api",
+        "pattern": { "regexp": "^$" },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".",
+          "endsPattern": "Server listening"
+        }
+      }
+    },
+    {
+      "label": "dev:web",
+      "type": "shell",
+      "command": "pnpm run dev:web",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "ecosystem-web",
+        "pattern": { "regexp": "^$" },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".",
+          "endsPattern": "Local:"
+        }
+      }
+    },
+    {
+      "label": "Start Full Stack",
+      "dependsOn": ["db:push", "dev:api", "dev:web"],
+      "dependsOrder": "sequence",
+      "problemMatcher": []
+    }
+  ]
+}

@@ -1,6 +1,8 @@
 # 🌿 Self-Healing Ecosystem Model
 
-🔗 **Live Demo:** [self-healing-model--khamzatchimaev1.replit.app](https://self-healing-model--khamzatchimaev1.replit.app)
+🔗 **Live Demo:** After you deploy, put your public URL here (see [DEPLOY.md](./DEPLOY.md))
+
+_Example (legacy): [self-healing-model--khamzatchimaev1.replit.app](https://self-healing-model--khamzatchimaev1.replit.app)_
 
 A full-stack Machine Learning powered web application that simulates ecosystem dynamics, predicts ecological health, and recommends interventions for forest, river, grassland, and polar biomes.
 
@@ -235,29 +237,49 @@ Self-Healing-Ecosystem/
 
 ## 🚀 Local Development
 
+### VS Code (recommended)
+
+1. Install [Node.js](https://nodejs.org) (v20+) and [pnpm](https://pnpm.io) (`npm i -g pnpm`)
+2. **No Docker required** — the app uses an embedded local database (PGLite) by default (`USE_PGLITE=true` in `.env`)
+3. Open this folder in VS Code
+4. Copy environment file: `copy .env.example .env` (PowerShell) or `cp .env.example .env` (Mac/Linux)
+5. Run **Terminal → Run Task → Start Full Stack**, or use **Run and Debug → Full Stack (API + Frontend)**
+6. Open **http://localhost:3000** (API runs on port 5000 in the background)
+
+**Optional:** Use cloud Postgres (Neon) with `USE_PGLITE=false` and `DATABASE_URL=...` in `.env`.
+
+### Manual terminals
+
 ```bash
 # Install dependencies
 pnpm install
 
+# Start PostgreSQL (Docker)
+pnpm run db:up
+
 # Push database schema
-pnpm --filter @workspace/db run push
+pnpm run db:push
 
-# Start API server
-pnpm --filter @workspace/api-server run dev
+# Start API server (terminal 1)
+pnpm run dev:api
 
-# Start frontend (separate terminal)
-pnpm --filter @workspace/ecosystem run dev
+# Start frontend (terminal 2)
+pnpm run dev:web
 ```
 
 ---
 
-## 🌐 Free Deployment (No Cost)
+## 🌐 Deploy Live (Free, Public Link)
+
+Full step-by-step guide: **[DEPLOY.md](./DEPLOY.md)**
 
 | Service | Platform | Purpose |
 |---|---|---|
-| Frontend | Vercel | React app (never expires) |
-| API Server | Render | Express server (free tier) |
-| Database | Neon | PostgreSQL (free forever) |
+| Frontend | Vercel | React app (permanent URL) |
+| API Server | Render | Express server |
+| Database | Neon | PostgreSQL (shared data for all users) |
+
+After deployment, share your Vercel URL — anyone can create ecosystems, simulate, and analyze.
 
 ---
 

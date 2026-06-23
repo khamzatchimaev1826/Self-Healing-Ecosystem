@@ -1,0 +1,11 @@
+# Public live URL (fill in after deployment)
+
+Frontend (share this link with everyone):
+https://YOUR-APP.vercel.app
+
+API (set as VITE_API_URL in Vercel):
+https://YOUR-API.onrender.com
+
+Database: Neon PostgreSQL (shared — all visitors see the same ecosystems)
+
+Deploy steps: see DEPLOY.md
