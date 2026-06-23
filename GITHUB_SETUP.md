@@ -1,43 +1,31 @@
-# Push to GitHub — Self Healing Ecosystems
+# GitHub repository
 
-Your **full working project** is on GitHub:
+**Name:** Self Healing Ecosystem  
+**URL:** https://github.com/khamzatchimaev1826/Self-Healing-Ecosystem
 
-**Branch (all files + README):**  
-https://github.com/khamzatchimaev1826/Self-Healing-Ecosytem-Model/tree/Self-Healing-Ecosystems
+## Create the repo (one time)
 
-**Make it the main code on GitHub (recommended):**
+1. Open https://github.com/new
+2. **Repository name:** `Self-Healing-Ecosystem`
+3. **Description:** ML-powered ecosystem simulation — create, simulate, and analyze biomes
+4. Choose **Public**
+5. Do **not** add README, .gitignore, or license (this project already has them)
+6. Click **Create repository**
 
-1. Open: https://github.com/khamzatchimaev1826/Self-Healing-Ecosytem-Model/compare/main...Self-Healing-Ecosystems
-2. Click **Create pull request** → **Merge pull request**
-3. (Optional) **Settings** → **General** → rename repository to `Self-Healing-Ecosystems`
-
-**Or create a new repo with the exact name:**
-
-1. Open: https://github.com/new?name=Self-Healing-Ecosystems&description=Self%20Healing%20Ecosystems%20-%20ML%20ecosystem%20simulator
-2. Create **empty** repo (no README)
-3. Run in this folder:
+## Push this project
 
 ```powershell
-git remote set-url origin https://github.com/khamzatchimaev1826/Self-Healing-Ecosystems.git
+git remote set-url origin https://github.com/khamzatchimaev1826/Self-Healing-Ecosystem.git
 git push -u origin main
 ```
 
----
-
-# Public live link (everyone can use the app)
-
-Follow **[DEPLOY.md](./DEPLOY.md)** — summary:
-
-| Step | Service | What you get |
-|------|---------|--------------|
-| 1 | [Neon](https://neon.tech) | `DATABASE_URL` |
-| 2 | [Render](https://render.com) Blueprint + GitHub | API URL |
-| 3 | [Vercel](https://vercel.com) + GitHub + `VITE_API_URL` | **Public app link** |
-
-After Vercel deploy, edit `LIVE_URL.txt` and README with your URL, then:
+If GitHub shows unrelated history, use:
 
 ```powershell
-git add LIVE_URL.txt README.md
-git commit -m "Add public live demo URL"
-git push
+git push -u origin main --force
 ```
+
+## Public live link
+
+After push, follow **[DEPLOY.md](./DEPLOY.md)** (Neon + Render + Vercel).  
+Then update **LIVE_URL.txt** and the README live demo line with your Vercel URL.

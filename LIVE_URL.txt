@@ -1,5 +1,7 @@
 # Public live URL (fill in after deployment)
 
+**Repository:** https://github.com/khamzatchimaev1826/Self-Healing-Ecosystem
+
 Frontend (share this link with everyone):
 https://YOUR-APP.vercel.app
 

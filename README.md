@@ -1,8 +1,8 @@
-# 🌿 Self Healing Ecosystems
+# 🌿 Self Healing Ecosystem
 
-🔗 **Live App:** _Deploy via [DEPLOY.md](./DEPLOY.md) — then add your URL here_
+🔗 **Live Demo:** _Deploy via [DEPLOY.md](./DEPLOY.md) — then add your public URL here_
 
-🔗 **Repository:** [github.com/khamzatchimaev1826/Self-Healing-Ecosystems](https://github.com/khamzatchimaev1826/Self-Healing-Ecosystems)
+🔗 **Repository:** [github.com/khamzatchimaev1826/Self-Healing-Ecosystem](https://github.com/khamzatchimaev1826/Self-Healing-Ecosystem)
 
 _Example (legacy Replit): [self-healing-model--khamzatchimaev1.replit.app](https://self-healing-model--khamzatchimaev1.replit.app)_
 
