@@ -1,7 +1,12 @@
 {
   "buildCommand": "pnpm --filter @workspace/ecosystem run build",
-  "outputDirectory": "artifacts/ecosystem/dist/public",
+  "outputDirectory": "dist/public",
   "installCommand": "pnpm install",
   "framework": null,
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
