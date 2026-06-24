@@ -1,359 +1,215 @@
-# 🌿 Self Healing Ecosystem
+# 🌿 Self-Healing Ecosystem
 
-📦 **GitHub:** [github.com/khamzatchimaev1826/Self-Healing-Ecosystem](https://github.com/khamzatchimaev1826/Self-Healing-Ecosystem)
+### 🌍 Live Application
 
-🔗 **Live Demo:** Deploy your permanent public link (see [Permanent public link](#-permanent-public-link) below) — anyone can view, add, simulate, and analyze ecosystems.
+**Live Demo:** https://self-healing-ecosystem-model.vercel.app
 
-A full-stack Machine Learning powered web application that simulates ecosystem dynamics, predicts ecological health, and recommends interventions for forest, river, grassland, and polar biomes.
+### 📦 Repository
 
-**ML Health Accuracy: ✅ Multi-model pipeline (5 ML models)**
-
----
-
-## 📌 Problem Statement
-
-Ecosystems worldwide face threats from pollution, deforestation, climate change, and biodiversity loss. Monitoring and predicting ecological health in real-time is complex because dozens of interdependent species and environmental factors interact simultaneously.
-
-This project uses Machine Learning to model those dynamics, predict collapse risk, and recommend corrective interventions — all through a live web interface.
+**GitHub Repository:** https://github.com/joshuafranklin1826/Self-Healing-Ecosystem
 
 ---
 
-## 🎯 Objectives
+An intelligent full-stack ecosystem simulation platform that models ecological interactions, predicts environmental health, estimates collapse risk, and recommends restoration strategies using multiple machine learning approaches.
 
-- Simulate population dynamics across 4 biome types with 36+ species
-- Predict ecosystem health score using a multi-model ML pipeline
-- Forecast population recovery time and collapse risk
-- Apply interventions and observe real-time effects
-- Provide AI-generated recommendations for ecosystem restoration
+## Overview
 
----
+Self-Healing Ecosystem is a machine learning powered environmental simulation platform designed to model ecosystem behavior across multiple biome types.
 
-## 🏗 System Architecture
+The system combines ecological population dynamics, environmental indicators, predictive analytics, and restoration planning to provide real-time ecosystem intelligence and long-term sustainability forecasting.
 
-```
-User
-  │
-  ▼
-React Frontend (Vite + TailwindCSS)
-  │
-  ▼
-Express REST API (Node.js)
-  │
-  ▼
-ML Pipeline (5 Models)
-  │
-  ▼
-PostgreSQL Database (Drizzle ORM)
-  │
-  ▼
-Ecosystem Health Score + Predictions
-```
+Users can create ecosystems, simulate environmental changes, apply interventions, and analyze ecological outcomes through an interactive web interface.
 
 ---
 
-## 🛠 Technology Stack
+## Key Features
+
+* Multi-biome ecosystem simulation
+* Real-time ecosystem health scoring
+* Species population dynamics modeling
+* Ecosystem collapse risk prediction
+* Recovery time estimation
+* Automated intervention recommendations
+* Interactive data visualization dashboards
+* Scenario simulation and forecasting
+* Machine learning driven environmental analysis
+* Public cloud deployment accessible worldwide
+
+---
+
+## Supported Ecosystems
+
+| Biome        | Representative Species               |
+| ------------ | ------------------------------------ |
+| 🌳 Forest    | Oak, Deer, Wolf, Bear, Fox           |
+| 🌊 River     | Algae, Fish, Otter, Heron, Pike      |
+| 🌾 Grassland | Bison, Gazelle, Prairie Dog, Hawk    |
+| ❄️ Polar     | Arctic Moss, Arctic Hare, Polar Bear |
+
+**Total simulated species:** 36+
+
+---
+
+## Technology Stack
 
 ### Frontend
-- React 18
-- Vite
-- TailwindCSS (cyberpunk dark theme)
-- Framer Motion (animations)
-- Recharts (data visualization)
-- TanStack Query (data fetching)
-- Wouter (routing)
+
+* React 18
+* Vite
+* Tailwind CSS
+* Framer Motion
+* Recharts
+* TanStack Query
+* Wouter
 
 ### Backend
-- Node.js
-- Express.js
-- Pino (logging)
-- Zod (validation)
-- CORS
+
+* Node.js
+* Express.js
+* Zod
+* Pino Logger
+* CORS
 
 ### Database
-- PostgreSQL
-- Drizzle ORM
 
-### Machine Learning
-- Health Classifier (rule-based + weighted scoring)
-- Recovery Time Predictor
-- Collapse Risk SVM (Support Vector Machine logic)
-- Lotka-Volterra Population Dynamics
-- Recommendation Engine
+* PostgreSQL
+* Drizzle ORM
+* PGLite support for local environments
 
----
+### Machine Learning Components
 
-## 🌍 Ecosystem Types
-
-| Biome | Species Count | Key Species |
-|---|---|---|
-| 🌳 Forest | 9 | Oak, Deer, Wolf, Bear, Fox |
-| 🌊 River | 9 | Algae, Fish, Otter, Heron, Pike |
-| 🌾 Grassland | 9 | Bison, Gazelle, Prairie Dog, Hawk |
-| ❄️ Polar | 9 | Arctic Moss, Arctic Hare, Polar Bear |
+* Weighted Health Classification
+* Population Recovery Prediction
+* Collapse Risk Classification
+* Lotka-Volterra Population Dynamics
+* Ecosystem Recommendation Engine
 
 ---
 
-## 🤖 ML Pipeline
+## Machine Learning Pipeline
 
-### 1. Health Classifier
-Scores ecosystem health (0–100) based on temperature, rainfall, pollution, deforestation rate, and species biodiversity.
+### Ecosystem Health Classifier
 
-```
-Health Score = 100
-  - temperature penalty
-  - rainfall penalty
-  - pollution penalty (×30)
-  - deforestation penalty (×20)
-  + biodiversity bonus (+10)
+Calculates ecosystem health scores using biodiversity metrics and environmental indicators.
 
-Thresholds: ≥70 = Healthy | 40–69 = Stressed | <40 = Collapsing
-```
+### Population Dynamics Engine
 
-### 2. Lotka-Volterra Population Dynamics
-Simulates predator-prey interactions over time using differential equations:
+Uses Lotka-Volterra differential equations to simulate predator-prey interactions and species relationships.
 
-```
-dPlants/dt     = r_p × Plants − a_ph × Plants × Herbivores
-dHerbivores/dt = b_ph × Plants × Herbivores − a_hp × Herbivores × Predators
-dPredators/dt  = b_hp × Herbivores × Predators − d_p × Predators
-```
+### Recovery Time Predictor
 
-### 3. Recovery Time Predictor
-Estimates weeks until ecosystem reaches Healthy status based on current health deficit.
+Estimates ecosystem recovery duration following interventions.
 
-### 4. Collapse Risk SVM
-Classifies collapse probability (0–1) using pollution, deforestation, and biodiversity as feature vectors.
+### Collapse Risk Model
 
-### 5. Recommendation Engine
-Generates prioritized intervention actions (HIGH / MEDIUM / LOW) based on the biggest detected threat factors.
+Evaluates ecosystem collapse probability using environmental stress variables.
+
+### Recommendation Engine
+
+Generates prioritized restoration actions based on detected ecological threats.
 
 ---
 
-## 📊 Ecosystem Parameters
+## Environmental Parameters
 
-| Parameter | Range | Critical Threshold |
-|---|---|---|
-| Temperature | −10°C to 50°C | >38°C or <17°C |
-| Rainfall | 0–5000 mm/yr | <300mm or >2500mm |
-| Pollution Level | 0–100% | >70% |
-| Deforestation Rate | 0–100%/yr | >30%/yr |
-
----
-
-## 🔧 Interventions Available
-
-| Intervention | Effect |
-|---|---|
-| Reforestation | Reduces deforestation rate |
-| Pollution Reduction | Lowers pollution level |
-| Species Introduction | Boosts target population |
-| Habitat Restoration | Improves temperature & rainfall |
-| Hunting Ban | Protects predator populations |
+| Parameter          | Range             |
+| ------------------ | ----------------- |
+| Temperature        | -10°C to 50°C     |
+| Rainfall           | 0 to 5000 mm/year |
+| Pollution          | 0% to 100%        |
+| Deforestation Rate | 0% to 100%        |
+| Biodiversity Index | Dynamic           |
 
 ---
 
-## 📡 API Documentation
+## Available Interventions
 
-### Health Check
-```
-GET /api/healthz
-Response: { "status": "ok" }
-```
+* Reforestation
+* Pollution Reduction
+* Species Reintroduction
+* Habitat Restoration
+* Hunting Restrictions
 
-### Create Ecosystem
-```
-POST /api/ecosystems
-Body: {
-  "name": "Amazon Sector 7",
-  "type": "forest",
-  "temperature": 26,
-  "rainfall": 1400,
-  "pollution": 0.15,
-  "deforestationRate": 0.2,
-  "species": [
-    { "id": "oak", "name": "Oak Tree", "type": "plant", "initialPopulation": 70 },
-    { "id": "deer", "name": "Deer", "type": "herbivore", "initialPopulation": 40 },
-    { "id": "wolf", "name": "Wolf", "type": "predator", "initialPopulation": 15 }
-  ]
-}
-Response: { "id": "1", "healthScore": 82.5, "healthStatus": "Healthy", ... }
-```
+---
 
-### List Ecosystems
-```
-GET /api/ecosystems
-Response: [ { "id": "1", "name": "...", "healthStatus": "Healthy", ... } ]
-```
+## System Architecture
 
-### Get Ecosystem
-```
-GET /api/ecosystems/:id
-```
-
-### Apply Intervention
-```
-PUT /api/ecosystems/:id/intervene
-Body: { "type": "reforestation", "intensity": 0.7 }
-```
-
-### Run Simulation
-```
-POST /api/simulation/:id/run
-Body: { "weeks": 52 }
-Response: { "dataPoints": [...], "finalPredictions": { ... } }
+```text
+React Frontend
+       ↓
+Express REST API
+       ↓
+Machine Learning Pipeline
+       ↓
+PostgreSQL Database
+       ↓
+Predictions and Recommendations
 ```
 
 ---
 
-## 📁 Directory Structure
+## API Endpoints
 
-```
-Self-Healing-Ecosystem/
+| Method | Endpoint                        | Description        |
+| ------ | ------------------------------- | ------------------ |
+| GET    | `/api/healthz`                  | Health check       |
+| POST   | `/api/ecosystems`               | Create ecosystem   |
+| GET    | `/api/ecosystems`               | List ecosystems    |
+| GET    | `/api/ecosystems/:id`           | Retrieve ecosystem |
+| PUT    | `/api/ecosystems/:id/intervene` | Apply intervention |
+| POST   | `/api/simulation/:id/run`       | Run simulation     |
+
+---
+
+## Project Structure
+
+```text
+artifacts/
+├── ecosystem/
+│   ├── src/pages
+│   └── src/components
 │
-├── artifacts/
-│   ├── ecosystem/          ← React frontend
-│   │   └── src/
-│   │       ├── pages/      ← Home, Builder, Dashboard
-│   │       └── components/ ← Layout, UI components
-│   │
-│   ├── api-server/         ← Express API
-│   │   └── src/
-│   │       ├── routes/     ← ecosystems, simulation
-│   │       └── lib/        ← ecosystemML.ts (ML pipeline)
-│   │
-│   └── ecosystem-deck/     ← 7-slide presentation deck
+├── api-server/
+│   ├── src/routes
+│   └── src/lib
 │
-├── lib/
-│   ├── db/                 ← PostgreSQL schema (Drizzle ORM)
-│   ├── api-spec/           ← OpenAPI spec
-│   └── api-client-react/   ← Auto-generated API client
-│
-├── vercel.json             ← Vercel frontend deployment config
-├── render.yaml             ← Render API deployment config
-└── README.md
+└── ecosystem-deck/
+
+lib/
+├── db
+├── api-spec
+└── api-client-react
 ```
 
 ---
 
-## 📤 Upload to GitHub (VS Code)
+## Production Deployment
 
-Your full project (all files, folders, README) is ready to push. Do this once:
+The application is deployed as a publicly accessible cloud service and can be accessed globally through:
 
-### Step 1 — Create empty repo on GitHub
-
-1. Open [github.com/new](https://github.com/new)
-2. **Repository name:** `Self-Healing-Ecosystem`
-3. Leave **Public** selected
-4. Do **not** add README, .gitignore, or license (you already have them)
-5. Click **Create repository**
-
-### Step 2 — Connect and push from VS Code
-
-1. Open this folder in **VS Code**
-2. Click **Source Control** (branch icon on the left) or press `Ctrl+Shift+G`
-3. If asked, **Sign in to GitHub** (click **Sign in** in the Source Control panel)
-4. Open terminal (`Ctrl+``) and run:
-
-```powershell
-git remote remove origin
-git remote add origin https://github.com/khamzatchimaev1826/Self-Healing-Ecosystem.git
-git push -u origin main
-```
-
-5. Or use the UI: **Source Control → … menu → Push** (after setting remote above)
-
-After push, your code lives at: **https://github.com/khamzatchimaev1826/Self-Healing-Ecosystem**
+https://self-healing-ecosystem-model.vercel.app
 
 ---
 
-## 🌍 Permanent public link
+## Future Improvements
 
-**Localhost** (`http://localhost:3000`) only works on your PC. For a **permanent link anyone can open**, deploy once (free):
-
-| Step | Service | What you get |
-|------|---------|----------------|
-| 1 | [Neon](https://neon.tech) | Free PostgreSQL (shared data for all users) |
-| 2 | [Render](https://render.com) | API URL — connect repo, use `render.yaml`, set `DATABASE_URL` |
-| 3 | [Vercel](https://vercel.com) | **Public app URL** — import repo, set `VITE_API_URL` to your Render URL |
-
-Full instructions: **[DEPLOY.md](./DEPLOY.md)**
-
-After deploy, update **[LIVE_URL.txt](./LIVE_URL.txt)** and the Live Demo line at the top of this README with your Vercel URL, then commit and push again from VS Code.
+* Satellite data integration
+* Neural-network based health prediction
+* Climate scenario simulations
+* CSV export support
+* Mobile application
+* Multi-ecosystem comparison dashboards
+* Real-world environmental data ingestion
+* Geospatial visualization support
 
 ---
 
-## 🚀 Local Development
+## Author
 
-### VS Code (recommended)
-
-1. Install [Node.js](https://nodejs.org) (v20+) and [pnpm](https://pnpm.io) (`npm i -g pnpm`)
-2. **No Docker required** — the app uses an embedded local database (PGLite) by default (`USE_PGLITE=true` in `.env`)
-3. Open this folder in VS Code
-4. Copy environment file: `copy .env.example .env` (PowerShell) or `cp .env.example .env` (Mac/Linux)
-5. Run **Terminal → Run Task → Start Full Stack**, or use **Run and Debug → Full Stack (API + Frontend)**
-6. Open **http://localhost:3000** (API runs on port 5000 in the background)
-
-**Optional:** Use cloud Postgres (Neon) with `USE_PGLITE=false` and `DATABASE_URL=...` in `.env`.
-
-### Manual terminals
-
-```bash
-# Install dependencies
-pnpm install
-
-# Start PostgreSQL (Docker)
-pnpm run db:up
-
-# Push database schema
-pnpm run db:push
-
-# Start API server (terminal 1)
-pnpm run dev:api
-
-# Start frontend (terminal 2)
-pnpm run dev:web
-```
+**Mandapalli Joshua Franklin**
 
 ---
 
-## 🌐 Deploy Live (Free, Public Link)
+## License
 
-Full step-by-step guide: **[DEPLOY.md](./DEPLOY.md)**
-
-| Service | Platform | Purpose |
-|---|---|---|
-| Frontend | Vercel | React app (permanent URL) |
-| API Server | Render | Express server |
-| Database | Neon | PostgreSQL (shared data for all users) |
-
-After deployment, share your Vercel URL — anyone can create ecosystems, simulate, and analyze.
-
----
-
-## 📈 ML Model Performance
-
-| Model | Type | Output |
-|---|---|---|
-| Health Classifier | Weighted scoring | 0–100 health score |
-| Lotka-Volterra | ODE simulation | Population over time |
-| Recovery Predictor | Linear regression | Weeks to recovery |
-| Collapse Risk | SVM-style classifier | 0–1 risk score |
-| Recommender | Rule-based ranking | Prioritized actions |
-
----
-
-## 🔮 Future Enhancements
-
-- User authentication and personal ecosystem portfolios
-- Real satellite data integration (NASA EarthData API)
-- Neural network for health classification
-- Climate change scenario modeling
-- Export simulation data as CSV
-- Mobile app version
-- Multi-ecosystem comparison dashboard
-
----
-
-## 👤 Contributors
-
-Built with React, Express, PostgreSQL and Machine Learning simulation.
+This project is released under the MIT License.
